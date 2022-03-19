@@ -1,0 +1,15 @@
+<div class="container bg-light">
+    <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" id="title">
+        <span id="title-error"></span>
+    </div>
+    <div class="mb-3">
+        <label for="message" class="form-label">Body</label>
+        <textarea class="form-control" id="message" rows="3"></textarea>
+        <span id="message-error"></span>
+    </div>
+    <div class="mb-3">
+        <app-button type='button' class="btn btn-secondary" text="Submit" (btnClick)="post()"></app-button>
+    </div>
+</div>

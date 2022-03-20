@@ -42,13 +42,9 @@ export class AddPostComponent implements OnInit {
             })
 
             .then(response => {
-                console.log('response post ', response.data)
-
                 if (response.data.isSuccess) {
-                    const allPosts = (document.getElementById('all-posts') as HTMLDivElement)
-
-                    const test = document.createElement('div');
-                    allPosts.prepend(test);
+                    location.reload();
+                    window.scrollTo(0, 0);
                 } else {
                     console.log('post err ', response.data.errorText);
                 }

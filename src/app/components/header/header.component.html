@@ -1,8 +1,19 @@
-<header>
-    <h1>{{ title }}</h1>
-    <!-- <app-button 
-    color="{{ showAddTask ? 'gray' : 'green' }}" 
-    text="{{ showAddTask ? 'Close' : 'Add' }}" 
-    *ngIf="hasRoute('/')">
-    </app-button> -->
-</header>
+<div class="mt-3 container-fluid p-0">
+    <div class="container-xxl d-flex flex-column flex-md-row justify-content-center justify-content-sm-between align-items-center">
+        <h1>{{ title }}</h1>
+        <div class="d-flex flex-row justify-content-center justify-content-md-end align-items-stretch align-items-center">
+            <a routerLink="/login" class="btn btn-sm me-2"   [ngStyle]="{
+                'display' : showAuthActions ? 'block' : 'none'
+            }">Log In</a>
+            <a routerLink="/register" class="btn btn-sm {{ showAuthActions ? 'me-2' : '' }}"   [ngStyle]="{
+                'display' : showAuthActions ? 'block' : 'none'
+            }">Register</a>
+            <a routerLink="/posts" class="btn btn-sm {{ showAuthActions ? 'me-2' : '' }}" [ngStyle]="{
+                'display' : showAuthActions ? 'none' : 'block'
+            }">Posts</a>
+            <app-button text="Sign out" [ngStyle]="{
+                'display' : showAuthActions ? 'none' : 'block'
+            }" (btnClick)="logout()"></app-button>
+        </div>
+    </div>
+</div>

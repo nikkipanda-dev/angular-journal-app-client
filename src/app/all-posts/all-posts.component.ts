@@ -10,6 +10,8 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class AllPostsComponent implements OnInit {
     posts: Post[] = [];
+    page: number = 1;
+    allPostsLen!: number;
 
     constructor(private cookieService: CookieService) {}
 
@@ -19,6 +21,103 @@ export class AllPostsComponent implements OnInit {
         }
 
         this.populatePosts();
+    }
+
+    previous() {
+        if (this.allPostsLen > 5) { 
+            this.posts = [];
+
+            ((this.page > 1) && (this.page <= Math.ceil(this.allPostsLen / 5))) && (this.page -= 1);
+
+            axios.get('http://localhost:8000/api/paginate', {
+                params: {
+                    offset: (this.page * 5) - 5,
+                    limit: 5
+                },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                },
+            })
+
+            .then(response => {
+                console.log('response ', response.data.data.posts)
+                if (response.data.isSuccess) {
+                    for (let val of response.data.data.posts) {
+                        console.log('id ', val.id);
+
+                        const date = new Intl.DateTimeFormat('en-US', {
+                            timeZone: 'Asia/Manila',
+                            dateStyle: 'medium',
+                            timeStyle: 'short',
+                            hourCycle: 'h12',
+                        }).format(new Date(val.created_at));
+
+                        this.posts.push({
+                            ...val,
+                            parsed_date: date
+                        })
+                    }
+                } else {
+                    console.log('paginate ', response.data.errorText);
+                }
+            })
+
+            .catch(err => {
+                console.log('err ', err.response ? err.response : err)
+            });
+        } else {
+            console.log('not more than 5');
+        }
+    }
+
+    next() {
+        if (this.allPostsLen > 5) {
+            this.posts = [];
+
+            ((this.page >= 1) && (this.page <= Math.ceil(this.allPostsLen / 5) - 1)) && (this.page += 1);
+
+            axios.get('http://localhost:8000/api/paginate', {
+                params: {
+                    offset: (this.page * 5) - 5,
+                    limit: 5
+                },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                },
+            })
+
+            .then(response => {
+                if (response.data.isSuccess) {
+                    for (let val of response.data.data.posts) {
+                        console.log('id ', val.id);
+
+                        const date = new Intl.DateTimeFormat('en-US', {
+                            timeZone: 'Asia/Manila',
+                            dateStyle: 'medium',
+                            timeStyle: 'short',
+                            hourCycle: 'h12',
+                        }).format(new Date(val.created_at));
+
+                        this.posts.push({
+                            ...val,
+                            parsed_date: date
+                        })
+                    }
+                } else {
+                    console.log('paginate err ', response.data.errorText)
+                }
+            })
+
+            .catch(err => {
+                console.log('err ', err.response ? err.response : err)
+            });
+        } else {
+            console.log('not more than 5 ', this.posts);
+        }
     }
 
     populatePosts() {
@@ -31,19 +130,24 @@ export class AllPostsComponent implements OnInit {
         })
 
         .then(response => {
-            for (let val of response.data.data.posts) {
-                const date = new Intl.DateTimeFormat('en-US', {
-                    timeZone: 'Asia/Manila',
-                    dateStyle: 'medium',
-                    timeStyle: 'short',
-                    hourCycle: 'h12',
-                }).format(new Date(val.created_at));
-                console.log('val', date)
+            if (response.data.isSuccess) {
+                this.allPostsLen = response.data.data.posts.length;
 
-                this.posts.push({
-                    ...val,
-                    parsed_date: date
-                })
+                for (let val of response.data.data.posts.slice(0, 5)) {
+                    const date = new Intl.DateTimeFormat('en-US', {
+                        timeZone: 'Asia/Manila',
+                        dateStyle: 'medium',
+                        timeStyle: 'short',
+                        hourCycle: 'h12',
+                    }).format(new Date(val.created_at));
+
+                    this.posts.push({
+                        ...val,
+                        parsed_date: date
+                    })
+                }
+            } else {
+                console.log('err get all ', response.data.errorText);
             }
         })
 

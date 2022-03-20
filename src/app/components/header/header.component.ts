@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UiService } from '../../services/ui.service';
-import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
+import axios from 'axios';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-header',
@@ -9,16 +8,56 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  title: string = 'Journal';
-  showAddTask!: boolean;
-  subscription!: Subscription;
+  title: string = 'Digital Journal';
+  showAuthActions!: boolean;
   
-  constructor() {}
-
-  ngOnInit(): void {}
-
-  hasRoute(route: string) {
-    // console.log('route: ', this.router.url === route);
-    // return this.router.url === route;
+    constructor(private cookieService: CookieService) {
+        this.checkCookies();
   }
+
+    ngOnInit(): void {}
+
+    checkCookies() {
+        if (this.cookieService.check('journal_app_user') && this.cookieService.check('journal_app_token')) {
+            this.showAuthActions = false;
+        } else {
+            this.showAuthActions = true;
+        }
+    }
+
+    logout() {
+        console.log('logout', JSON.parse(this.cookieService.get('journal_app_user')))
+
+        if (!(this.showAuthActions)) {
+            axios.post('http://localhost:8000/api/logout', {
+                id: JSON.parse(this.cookieService.get('journal_app_user')).id
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Access-Control-Allow-Origin': '*'
+                }
+            })
+
+            .then(response => {
+                if (response.data.isSuccess) {
+                    this.cookieService.delete('journal_app_user');
+
+                    this.cookieService.delete('journal_app_token');
+
+                    if (!(this.cookieService.check('journal_app_user')) && !(this.cookieService.check('journal_app_token'))) {
+                        window.location.pathname = '/'
+                    } else {
+                        window.location.pathname = '/posts'
+                    }
+                } else {
+                    console.log('logout err ', response.data.errorText);
+                }
+            })
+
+            .catch(err => {
+                console.log('err ', err.response ? err.response.data.errors : '');
+            })
+        }
+    }
 }

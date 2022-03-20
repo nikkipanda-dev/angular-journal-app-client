@@ -1,6 +1,13 @@
-<div class="container mt-5" id="all-posts">
+<div class="container mt-5" id="all-posts" [ngStyle]="{
+    'max-width': '800px'
+}">
     <app-post
     *ngFor="let post of posts"
     [post]="post">
     </app-post>
+    <div class="d-flex flex-wrap justify-content-center align-items-center">
+        <app-button text="Previous" (btnClick)="previous()"></app-button>
+        <div>{{ page }}</div>
+        <app-button text="Next" (btnClick)="next()"></app-button>
+    </div>
 </div>

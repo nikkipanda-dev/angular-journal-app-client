@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-add-post',
@@ -7,11 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-post.component.css']
 })
 export class AddPostComponent implements OnInit {
+    constructor(private cookieService: CookieService) { }
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+        if (!(this.cookieService.check('journal_app_user')) && !(this.cookieService.check('journal_app_token'))) {
+            window.location.pathname = '/'
+        }
+    }
 
     post() {
         let title = null;
@@ -45,10 +48,34 @@ export class AddPostComponent implements OnInit {
             })
 
             .then(response => {
-                console.log('response ', response.data)
-                // const allPosts = (document.getElementById('all-posts') as HTMLDivElement)
-                // console.log('all posts', allPosts);
-                // allPosts.prepend('hello');
+                console.log('response post ', response.data)
+
+                if (response.data.isSuccess) {
+                    const allPosts = (document.getElementById('all-posts') as HTMLDivElement)
+
+        //                 < div class="card mt-3" >
+        //                     <div class="card-header" >
+        //                         {{ post.id }
+        //         }
+        //         </div>
+        //             < div class="card-body" >
+        //                 <app-button text = "Edit" class="btn-dark" > </app-button>
+        //                     < div >
+        //                     {{ post.title }
+        //     }
+        // </div>
+        //         < div >
+        //         {{ post.body }}
+        // </div>
+        //     < p class="card-text text-center text-sm-end" > <small class="text-muted" > Last updated 3 mins ago < /small></p >
+        //         </div>
+        //         < /div>
+
+                    const test = document.createElement('div');
+                    allPosts.prepend(test);
+                } else {
+                    console.log('post err ', response.data.errorText);
+                }
             })
 
             .catch(err => {
@@ -60,7 +87,7 @@ export class AddPostComponent implements OnInit {
             }
 
             if (!(body)) {
-                (document.getElementById('message-error') as HTMLInputElement).innerHTML = 'Title error';
+                (document.getElementById('message-error') as HTMLInputElement).innerHTML = 'Body error';
             }
         }
     }

@@ -18,6 +18,7 @@ import { PostComponent } from './post/post.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -40,7 +41,8 @@ const appRoutes: Routes = [
     PostComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,

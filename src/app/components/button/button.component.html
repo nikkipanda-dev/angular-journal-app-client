@@ -1,3 +1,3 @@
-<button class="{{ 'btn btn-sm' + (class ? ' ' + class : '') }}" (click)="onClick()">
+<button class="{{ 'btn btn-sm' + (class ? ' ' + class : '') }}" (click)="onClick()" [attr.data-targetid]="id">
     {{ text }}
 </button>

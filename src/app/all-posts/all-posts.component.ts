@@ -31,20 +31,24 @@ export class AllPostsComponent implements OnInit {
         })
 
         .then(response => {
-            const postsResponse = response.data;
-            console.log('HELOOOOOOO', postsResponse);
+            for (let val of response.data.data.posts) {
+                const date = new Intl.DateTimeFormat('en-US', {
+                    timeZone: 'Asia/Manila',
+                    dateStyle: 'medium',
+                    timeStyle: 'short',
+                    hourCycle: 'h12',
+                }).format(new Date(val.created_at));
+                console.log('val', date)
 
-            this.posts = (postsResponse.data.posts.length > 0) ? postsResponse.data.posts : [];
-
-            // console.log('posts ', this.posts)
-
-            // for (let i of this.posts) {
-            //     (document.getElementById('all-posts') as HTMLDivElement).append(i.title);
-            // }
+                this.posts.push({
+                    ...val,
+                    parsed_date: date
+                })
+            }
         })
 
         .catch(err => {
-            console.log('err ', err.response ? err.response : '')
+            console.log('err ', err.response ? err.response : err)
         });
     }
 }

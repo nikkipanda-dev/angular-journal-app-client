@@ -32,12 +32,6 @@ export class AddPostComponent implements OnInit {
             axios.post('http://localhost:8000/api/store', {
                 title: title,
                 body: body,
-                // posted: new Intl.DateTimeFormat('en-US', {
-                //     timeZone: 'Asia/Manila',
-                //     dateStyle: 'medium',
-                //     timeStyle: 'short',
-                //     hourCycle: 'h12',
-                // }).format(posted)
             }, {
                 headers: {
                     'Content-Type': 'application/json',
@@ -52,24 +46,6 @@ export class AddPostComponent implements OnInit {
 
                 if (response.data.isSuccess) {
                     const allPosts = (document.getElementById('all-posts') as HTMLDivElement)
-
-        //                 < div class="card mt-3" >
-        //                     <div class="card-header" >
-        //                         {{ post.id }
-        //         }
-        //         </div>
-        //             < div class="card-body" >
-        //                 <app-button text = "Edit" class="btn-dark" > </app-button>
-        //                     < div >
-        //                     {{ post.title }
-        //     }
-        // </div>
-        //         < div >
-        //         {{ post.body }}
-        // </div>
-        //     < p class="card-text text-center text-sm-end" > <small class="text-muted" > Last updated 3 mins ago < /small></p >
-        //         </div>
-        //         < /div>
 
                     const test = document.createElement('div');
                     allPosts.prepend(test);

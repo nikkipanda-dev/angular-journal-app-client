@@ -1,15 +1,10 @@
 <div class="card mt-3">
-    <div class="card-header">
-        {{ post.id }}
-    </div>
+    <div class="card-header">{{ post.title }}</div>
     <div class="card-body">
-        <app-button text="Edit" class="btn-dark"></app-button>
-        <div>
-            {{ post.title }}
-        </div>
+        <app-button text="Edit" class="btn-dark" data-bs-toggle="modal" data-bs-target="#static-modal" id="{{ post.id + '-card' }}" (btnClick)="getData()">Edit</app-button>
         <div>
             {{ post.body }}
         </div>
-        <p class="card-text text-center text-sm-end"><small class="text-muted">Last updated 3 mins ago</small></p>
+        <p class="card-text text-center text-sm-end"><small class="text-muted">{{ post.parsed_date }}</small></p>
     </div>
 </div>

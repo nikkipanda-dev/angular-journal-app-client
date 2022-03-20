@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
+import axios from 'axios';
 
 @Component({
   selector: 'app-posts',
@@ -7,8 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostsComponent implements OnInit {
 
-  constructor() { }
+    constructor(private cookieService: CookieService) { }
 
   ngOnInit(): void {
+      if (!(this.cookieService.check('journal_app_user')) && !(this.cookieService.check('journal_app_token'))) {
+            window.location.pathname = '/'
+      }
   }
 }

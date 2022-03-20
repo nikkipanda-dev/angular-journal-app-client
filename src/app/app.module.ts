@@ -16,9 +16,13 @@ import { AddPostComponent } from './add-post/add-post.component';
 import { AllPostsComponent } from './all-posts/all-posts.component';
 import { PostComponent } from './post/post.component';
 import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent},
+    { path: 'login', component: LoginComponent },
+    { path: 'register', component: RegisterComponent },
     {path: 'about', component: AboutComponent},
     {path: 'posts', component: PostsComponent},
 ]
@@ -34,7 +38,9 @@ const appRoutes: Routes = [
     AddPostComponent,
     AllPostsComponent,
     PostComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

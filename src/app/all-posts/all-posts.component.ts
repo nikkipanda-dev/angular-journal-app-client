@@ -1,6 +1,7 @@
 import { Post } from '../Post';
 import { Component, OnInit } from '@angular/core';
 import axios from 'axios';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-all-posts',
@@ -10,11 +11,14 @@ import axios from 'axios';
 export class AllPostsComponent implements OnInit {
     posts: Post[] = [];
 
-    constructor() {
-        this.populatePosts();
-    }
+    constructor(private cookieService: CookieService) {}
 
     ngOnInit(): void {
+        if (!(this.cookieService.check('journal_app_user')) && !(this.cookieService.check('journal_app_token'))) {
+            window.location.pathname = '/'
+        }
+
+        this.populatePosts();
     }
 
     populatePosts() {
@@ -31,6 +35,7 @@ export class AllPostsComponent implements OnInit {
             console.log('HELOOOOOOO', postsResponse);
 
             this.posts = (postsResponse.data.posts.length > 0) ? postsResponse.data.posts : [];
+
             // console.log('posts ', this.posts)
 
             // for (let i of this.posts) {

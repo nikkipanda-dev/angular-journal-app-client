@@ -29,7 +29,7 @@ export class AddPostComponent implements OnInit {
         }
 
         if (title && body) {
-            axios.post('http://localhost:8000/api/store', {
+            axios.post('https://demo-angular-nikkipanda.xyz/api/store', {
                 title: title,
                 body: body,
             }, {

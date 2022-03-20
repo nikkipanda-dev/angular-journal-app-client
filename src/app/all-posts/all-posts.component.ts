@@ -29,7 +29,7 @@ export class AllPostsComponent implements OnInit {
 
             ((this.page > 1) && (this.page <= Math.ceil(this.allPostsLen / 5))) && (this.page -= 1);
 
-            axios.get('http://localhost:8000/api/paginate', {
+            axios.get('https://demo-angular-nikkipanda.xyz/api/paginate', {
                 params: {
                     offset: (this.page * 5) - 5,
                     limit: 5
@@ -78,7 +78,7 @@ export class AllPostsComponent implements OnInit {
 
             ((this.page >= 1) && (this.page <= Math.ceil(this.allPostsLen / 5) - 1)) && (this.page += 1);
 
-            axios.get('http://localhost:8000/api/paginate', {
+            axios.get('https://demo-angular-nikkipanda.xyz/api/paginate', {
                 params: {
                     offset: (this.page * 5) - 5,
                     limit: 5
@@ -121,7 +121,7 @@ export class AllPostsComponent implements OnInit {
     }
 
     populatePosts() {
-        axios.get('http://localhost:8000/api/get', {
+        axios.get('https://demo-angular-nikkipanda.xyz/api/get', {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',

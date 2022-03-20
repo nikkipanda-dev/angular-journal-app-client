@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
         let passwordConfirmation = (document.getElementById('password-confirmation') as HTMLInputElement).value;
 
         if (email && password && passwordConfirmation) {
-            axios.post('http://localhost:8000/api/register', {
+            axios.post('https://demo-angular-nikkipanda.xyz/api/register', {
                 email: email,
                 password: password,
                 password_confirmation: passwordConfirmation

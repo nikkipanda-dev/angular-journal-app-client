@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit {
         console.log('logout', JSON.parse(this.cookieService.get('journal_app_user')))
 
         if (!(this.showAuthActions)) {
-            axios.post('http://localhost:8000/api/logout', {
+            axios.post('https://demo-angular-nikkipanda.xyz/api/logout', {
                 id: JSON.parse(this.cookieService.get('journal_app_user')).id
             }, {
                 headers: {

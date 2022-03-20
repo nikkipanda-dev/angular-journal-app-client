@@ -54,7 +54,7 @@ export class PostComponent implements OnInit {
         }
 
         if (postId && title && body) {
-            axios.post('http://localhost:8000/api/update', {
+            axios.post('https://demo-angular-nikkipanda.xyz/api/update', {
                 id: postId,
                 title: title,
                 body: body,
@@ -102,7 +102,7 @@ export class PostComponent implements OnInit {
         }
 
         if (postId) {
-            axios.post('http://localhost:8000/api/destroy', {
+            axios.post('https://demo-angular-nikkipanda.xyz/api/destroy', {
                 id: postId,
             }, {
                 headers: {

@@ -1,5 +1,4 @@
 import { Component, Injectable, OnInit } from '@angular/core';
-import axios from 'axios';
 import { CookieService } from 'ngx-cookie-service';
 
 @Injectable()

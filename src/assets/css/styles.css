@@ -11,7 +11,7 @@ footer {
     min-height: 10vh;
 }
 
-#home, #home > div, #about, #about > div {
+#home, #home > div, #about, #about > div, #login, #login > div, #register, #register > div {
     min-height: 80vh;
 }
 

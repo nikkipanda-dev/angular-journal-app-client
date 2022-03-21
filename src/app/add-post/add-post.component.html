@@ -1,17 +1,17 @@
-<div class="container bg-light mt-3 py-3" [ngStyle]="{
+<div class="container mt-3" [ngStyle]="{
     'max-width': '800px'
 }">
-    <div class="mb-3">
-        <label for="title" class="form-label">Title</label>
+    <div class="mb-3 d-flex flex-column flex-sm-row justify-content-center justify-content-sm-end align-items-center align-items-sm-baseline text-start">
+        <label for="title" class="form-label me-sm-2">Title</label>
         <input type="text" class="form-control" id="title">
         <span id="title-error"></span>
     </div>
-    <div class="mb-3">
+    <div class="mb-3 d-flex flex-column justify-content-center align-items-center align-items-sm-start text-start">
         <label for="message" class="form-label">Body</label>
         <textarea class="form-control" id="message" rows="3"></textarea>
         <span id="message-error"></span>
     </div>
-    <div class="text-center d-flex flex-column flex-sm-row justify-content-center justify-content-sm-end align-items-stretch align-items-sm-center">
+    <div class="mb-3 d-flex flex-column justify-content-center align-items-center">
         <app-button type='button' class="btn-secondary" text="Submit" (btnClick)="post()"></app-button>
     </div>
 </div>

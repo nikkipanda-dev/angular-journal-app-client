@@ -1,5 +1,5 @@
 <div class="card mt-3">
-    <div class="card-header d-flex flex-column flex-sm-row justify-content-center justify-content-between align-items-stretch align-items-sm-center text-center">
+    <div class="card-header d-flex flex-wrap flex-row justify-content-center justify-content-between align-items-center">
         <h4>{{ post.title }}</h4>
         <app-button text="Edit" class="btn-warning" data-bs-toggle="modal" data-bs-target="#static-modal" data-target-type="update" id="{{ post.id + '-card' }}" (btnClick)="getData()"></app-button>
     </div>
@@ -8,7 +8,7 @@
             {{ post.body }}
         </div>
     </div>
-    <div class="card-footer d-flex flex-column flex-sm-row justify-content-center justify-content-sm-end align-items-center">
+    <div class="card-footer d-flex flex-wrap flex-row justify-content-center justify-content-sm-end align-items-center">
         <small class="text-muted me-0 me-sm-2">{{ post.parsed_date }}</small>
         <button text="Delete" class="btn btn-dark btn-sm rounded-0" data-bs-toggle="modal" data-bs-target="#static-modal" data-target-type="delete" id="{{ post.id + '-card' }}" (click)="showAlert()">Delete</button>
     </div>

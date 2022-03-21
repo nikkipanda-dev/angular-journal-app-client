@@ -1,7 +1,8 @@
-<div class="container-fluid p-0">
+<div class="container-fluid p-0 bg-light">
     <div class="d-block" id="loader" [ngStyle]="{
         'opacity': '1',
-        'transition': 'all ease-in-out .3s'
+        'transition': 'all ease .3s',
+        'mix-blend-mode': 'multiply'
     }">
         <div class="d-flex justify-content-center align-items-center" [ngStyle]="{
                 'height': '100vh',
@@ -12,7 +13,9 @@
     </div>
     <div class="d-none" id="main">
         <app-header></app-header>
-        <router-outlet></router-outlet>
-        <app-footer></app-footer>
+        <main>
+            <router-outlet></router-outlet>
+            <app-footer></app-footer>
+        </main>
     </div>
 </div>

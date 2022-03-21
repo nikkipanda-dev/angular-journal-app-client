@@ -31,6 +31,7 @@ export class AllPostsComponent implements OnInit {
 
             axios.get('https://demo-angular-nikkipanda.xyz/api/paginate', {
                 params: {
+                    user_id: JSON.parse(this.cookieService.get('journal_app_user')).id,
                     offset: (this.page * 5) - 5,
                     limit: 5
                 },
@@ -80,6 +81,7 @@ export class AllPostsComponent implements OnInit {
 
             axios.get('https://demo-angular-nikkipanda.xyz/api/paginate', {
                 params: {
+                    user_id: JSON.parse(this.cookieService.get('journal_app_user')).id,
                     offset: (this.page * 5) - 5,
                     limit: 5
                 },
@@ -122,6 +124,9 @@ export class AllPostsComponent implements OnInit {
 
     populatePosts() {
         axios.get('https://demo-angular-nikkipanda.xyz/api/get', {
+            params: {
+                user_id: JSON.parse(this.cookieService.get('journal_app_user')).id,
+            },
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',

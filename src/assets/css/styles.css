@@ -1,0 +1,24 @@
+nav {
+    min-height: 10vh;
+    box-shadow:  5px 10px 20px #f0f0f0;
+}
+
+main {
+    min-height: 80vh;
+}
+
+footer {
+    min-height: 10vh;
+}
+
+#home, #home > div, #about, #about > div {
+    min-height: 80vh;
+}
+
+#home {
+    background: center / cover url("/assets/images/Moon.svg");
+}
+
+button, button:focus, .btn, .btn-sm, a {
+    box-shadow: none !important;
+}

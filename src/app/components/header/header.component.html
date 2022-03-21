@@ -1,6 +1,6 @@
-<div class="mt-3 container-fluid p-0">
+<nav class="sticky-top container-fluid p-0 d-flex justify-content-center align-items-center bg-light">
     <div class="container-xxl d-flex flex-column flex-md-row justify-content-center justify-content-sm-between align-items-center">
-        <h1>{{ title }}</h1>
+        <a routerLink="/" class="btn btn-sm me-2"><h1>{{ title }}</h1></a>
         <div class="d-flex flex-row justify-content-center justify-content-md-end align-items-stretch align-items-center">
             <a routerLink="/login" class="btn btn-sm me-2"   [ngStyle]="{
                 'display' : showAuthActions ? 'block' : 'none'
@@ -16,4 +16,4 @@
             }" (btnClick)="logout()"></app-button>
         </div>
     </div>
-</div>
+</nav>

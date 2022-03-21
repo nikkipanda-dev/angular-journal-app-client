@@ -1,6 +1,7 @@
 import { Post } from '../Post';
 import { Component, OnInit, Input } from '@angular/core';
 import axios from 'axios';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-post',
@@ -10,9 +11,12 @@ import axios from 'axios';
 export class PostComponent implements OnInit {
     @Input() post!: Post;
 
-    constructor() { }
+    constructor(private cookieService: CookieService) { }
 
     ngOnInit(): void {
+        if (!(this.cookieService.check('journal_app_user')) && !(this.cookieService.check('journal_app_token'))) {
+            window.location.pathname = '/'
+        }
     }
 
     getData() {
@@ -40,6 +44,7 @@ export class PostComponent implements OnInit {
     }
 
     updatePost() {
+        let userId = null;
         let postId = null;
         let title = null;
         let body = null;
@@ -48,6 +53,7 @@ export class PostComponent implements OnInit {
             (document.getElementById('update-title-error') as HTMLInputElement).innerHTML = '';
             (document.getElementById('update-message-error') as HTMLInputElement).innerHTML = '';
 
+            userId = JSON.parse(this.cookieService.get('journal_app_user')).id;
             postId = (document.getElementById('post-id') as HTMLInputElement).value;
             title = (document.getElementById('update-title') as HTMLInputElement).value;
             body = (document.getElementById('update-message') as HTMLInputElement).value;
@@ -55,7 +61,8 @@ export class PostComponent implements OnInit {
 
         if (postId && title && body) {
             axios.post('https://demo-angular-nikkipanda.xyz/api/update', {
-                id: postId,
+                user_id: userId,
+                post_id: postId,
                 title: title,
                 body: body,
             }, {

@@ -8,11 +8,15 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./add-post.component.css']
 })
 export class AddPostComponent implements OnInit {
+    private userId!: number;
+
     constructor(private cookieService: CookieService) { }
 
     ngOnInit(): void {
         if (!(this.cookieService.check('journal_app_user')) && !(this.cookieService.check('journal_app_token'))) {
             window.location.pathname = '/'
+        } else {
+            this.userId = JSON.parse(this.cookieService.get('journal_app_user')).id;
         }
     }
 
@@ -25,12 +29,12 @@ export class AddPostComponent implements OnInit {
             (document.getElementById('title-error') as HTMLInputElement).innerHTML = '';
             (document.getElementById('message-error') as HTMLInputElement).innerHTML = '';
 
-            userId = JSON.parse(this.cookieService.get('journal_app_user')).id;
+            userId = this.userId;
             title = (document.getElementById('title') as HTMLInputElement).value;
             body = (document.getElementById('message') as HTMLInputElement).value;
         }
 
-        if (title && body) {
+        if (userId && title && body) {
             axios.post('https://demo-angular-nikkipanda.xyz/api/store', {
                 user_id: userId,
                 title: title,

@@ -12,12 +12,15 @@ export class AllPostsComponent implements OnInit {
     posts: Post[] = [];
     page: number = 1;
     allPostsLen!: number;
+    private userId!: number;
 
     constructor(private cookieService: CookieService) {}
 
     ngOnInit(): void {
         if (!(this.cookieService.check('journal_app_user')) && !(this.cookieService.check('journal_app_token'))) {
             window.location.pathname = '/'
+        } else {
+            this.userId = JSON.parse(this.cookieService.get('journal_app_user')).id;
         }
 
         this.populatePosts();
@@ -31,7 +34,7 @@ export class AllPostsComponent implements OnInit {
 
             axios.get('https://demo-angular-nikkipanda.xyz/api/paginate', {
                 params: {
-                    user_id: JSON.parse(this.cookieService.get('journal_app_user')).id,
+                    user_id: this.userId,
                     offset: (this.page * 5) - 5,
                     limit: 5
                 },
@@ -81,7 +84,7 @@ export class AllPostsComponent implements OnInit {
 
             axios.get('https://demo-angular-nikkipanda.xyz/api/paginate', {
                 params: {
-                    user_id: JSON.parse(this.cookieService.get('journal_app_user')).id,
+                    user_id: this.userId,
                     offset: (this.page * 5) - 5,
                     limit: 5
                 },
@@ -125,7 +128,7 @@ export class AllPostsComponent implements OnInit {
     populatePosts() {
         axios.get('https://demo-angular-nikkipanda.xyz/api/get', {
             params: {
-                user_id: JSON.parse(this.cookieService.get('journal_app_user')).id,
+                user_id: this.userId,
             },
             headers: {
                 'Content-Type': 'application/json',

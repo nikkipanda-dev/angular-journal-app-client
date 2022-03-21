@@ -8,29 +8,25 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  title: string = 'Digital Journal';
-  showAuthActions!: boolean;
+    title: string = 'Digital Journal';
+    showAuthActions!: boolean;
+    private userId!: number;
   
-    constructor(private cookieService: CookieService) {
-        this.checkCookies();
-  }
+    constructor(private cookieService: CookieService) {}
 
-    ngOnInit(): void {}
-
-    checkCookies() {
+    ngOnInit(): void {
         if (this.cookieService.check('journal_app_user') && this.cookieService.check('journal_app_token')) {
             this.showAuthActions = false;
         } else {
             this.showAuthActions = true;
+            this.userId = JSON.parse(this.cookieService.get('journal_app_user')).id;
         }
     }
 
     logout() {
-        console.log('logout', JSON.parse(this.cookieService.get('journal_app_user')))
-
         if (!(this.showAuthActions)) {
             axios.post('https://demo-angular-nikkipanda.xyz/api/logout', {
-                id: JSON.parse(this.cookieService.get('journal_app_user')).id
+                id: this.userId,
             }, {
                 headers: {
                     'Content-Type': 'application/json',

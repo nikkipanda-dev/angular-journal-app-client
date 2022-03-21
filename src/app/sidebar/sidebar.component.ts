@@ -12,6 +12,7 @@ export class SidebarComponent implements OnInit {
     postsLen!: number;
     userDetails: any = [];
     randomPost: any = [];
+    private userId!: number;
 
     constructor(private cookieService: CookieService) { }
 
@@ -20,6 +21,7 @@ export class SidebarComponent implements OnInit {
             window.location.pathname = '/'
         } else {
             this.userDetails = JSON.parse(this.cookieService.get('journal_app_user'));
+            this.userId = JSON.parse(this.cookieService.get('journal_app_user')).id;
 
             const date = new Intl.DateTimeFormat('en-US', {
                 timeZone: 'Asia/Manila',
@@ -40,7 +42,7 @@ export class SidebarComponent implements OnInit {
     getLen() {
         axios.get('https://demo-angular-nikkipanda.xyz/api/get', {
             params: {
-                user_id: JSON.parse(this.cookieService.get('journal_app_user')).id,
+                user_id: this.userId,
             },
             headers: {
                 'Content-Type': 'application/json',
@@ -53,7 +55,6 @@ export class SidebarComponent implements OnInit {
             if (response.data.isSuccess) {
                 this.postsLen = response.data.data.posts.length;
             } else {
-                console.log('err get all ', response.data.errorText);
                 this.postsLen = response.data.errorText;
             }
         })
@@ -66,7 +67,7 @@ export class SidebarComponent implements OnInit {
     getRandomPost() {
         axios.get('https://demo-angular-nikkipanda.xyz/api/get/random', {
             params: {
-                user_id: JSON.parse(this.cookieService.get('journal_app_user')).id,
+                user_id: this.userId,
             },
             headers: {
                 'Content-Type': 'application/json',
@@ -88,10 +89,7 @@ export class SidebarComponent implements OnInit {
                     ...response.data.data.post, 
                     'created_at': date
                 };
-
-                console.log('random ', this.randomPost)
             } else {
-                console.log('err get all ', response.data.errorText);
                 this.randomPost = response.data.errorText;
             }
         })

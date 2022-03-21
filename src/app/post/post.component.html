@@ -1,5 +1,5 @@
 <div class="card mt-3">
-    <div class="card-header d-flex flex-wrap flex-row justify-content-between align-items-center">
+    <div class="card-header d-flex flex-column flex-sm-row justify-content-center justify-content-between align-items-stretch align-items-sm-center text-center">
         <h4>{{ post.title }}</h4>
         <app-button text="Edit" class="btn-warning" data-bs-toggle="modal" data-bs-target="#static-modal" data-target-type="update" id="{{ post.id + '-card' }}" (btnClick)="getData()"></app-button>
     </div>

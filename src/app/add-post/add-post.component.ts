@@ -17,6 +17,7 @@ export class AddPostComponent implements OnInit {
     }
 
     post() {
+        let userId = null;
         let title = null;
         let body = null;
 
@@ -24,12 +25,14 @@ export class AddPostComponent implements OnInit {
             (document.getElementById('title-error') as HTMLInputElement).innerHTML = '';
             (document.getElementById('message-error') as HTMLInputElement).innerHTML = '';
 
+            userId = JSON.parse(this.cookieService.get('journal_app_user')).id;
             title = (document.getElementById('title') as HTMLInputElement).value;
             body = (document.getElementById('message') as HTMLInputElement).value;
         }
 
         if (title && body) {
             axios.post('https://demo-angular-nikkipanda.xyz/api/store', {
+                user_id: userId,
                 title: title,
                 body: body,
             }, {

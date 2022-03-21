@@ -38,7 +38,7 @@ export class SidebarComponent implements OnInit {
     }
 
     getLen() {
-        axios.get('http://localhost:8000/api/get', {
+        axios.get('https://demo-angular-nikkipanda.xyz/api/get', {
             params: {
                 user_id: JSON.parse(this.cookieService.get('journal_app_user')).id,
             },
@@ -54,6 +54,7 @@ export class SidebarComponent implements OnInit {
                 this.postsLen = response.data.data.posts.length;
             } else {
                 console.log('err get all ', response.data.errorText);
+                this.postsLen = response.data.errorText;
             }
         })
 
@@ -63,7 +64,7 @@ export class SidebarComponent implements OnInit {
     }
 
     getRandomPost() {
-        axios.get('http://localhost:8000/api/get/random', {
+        axios.get('https://demo-angular-nikkipanda.xyz/api/get/random', {
             params: {
                 user_id: JSON.parse(this.cookieService.get('journal_app_user')).id,
             },
@@ -91,6 +92,7 @@ export class SidebarComponent implements OnInit {
                 console.log('random ', this.randomPost)
             } else {
                 console.log('err get all ', response.data.errorText);
+                this.randomPost = response.data.errorText;
             }
         })
 

@@ -73,21 +73,20 @@ export class PostComponent implements OnInit {
                     'Accept': 'application/json',
                     'Access-Control-Allow-Origin': '*',
                 },
-                withCredentials: true,
             })
 
-                .then(response => {
-                    if (response.data.isSuccess) {
-                        location.reload();
-                        window.scrollTo(0, 0);
-                    } else {
-                        console.log('post err ', response.data.errorText);
-                    }
-                })
+            .then(response => {
+                if (response.data.isSuccess) {
+                    location.reload();
+                    window.scrollTo(0, 0);
+                } else {
+                    console.log('post err ', response.data.errorText);
+                }
+            })
 
-                .catch(err => {
-                    console.log('err ', err.response ? err.response : '');
-                })
+            .catch(err => {
+                console.log('err ', err.response ? err.response : '');
+            });
         } else {
             if (!(postId)) {
                 console.log('Invalid post ID provided.');
@@ -104,36 +103,38 @@ export class PostComponent implements OnInit {
     }
 
     deletePost() {
+        let userId = null;
         let postId = null;
 
         if (document.getElementById('post-id')) {
+            userId = JSON.parse(this.cookieService.get('journal_app_user')).id;
             postId = (document.getElementById('post-id') as HTMLInputElement).value;
         }
 
         if (postId) {
             axios.post('https://demo-angular-nikkipanda.xyz/api/destroy', {
-                id: postId,
+                user_id: userId,
+                post_id: postId,
             }, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',
                     'Access-Control-Allow-Origin': '*',
                 },
-                withCredentials: true,
             })
 
-                .then(response => {
-                    if (response.data.isSuccess) {
-                        location.reload();
-                        window.scrollTo(0, 0);
-                    } else {
-                        console.log('post err ', response.data.errorText);
-                    }
-                })
+            .then(response => {
+                if (response.data.isSuccess) {
+                    location.reload();
+                    window.scrollTo(0, 0);
+                } else {
+                    console.log('post err ', response.data.errorText);
+                }
+            })
 
-                .catch(err => {
-                    console.log('err ', err.response ? err.response : '');
-                })
+            .catch(err => {
+                console.log('err ', err.response ? err.response : '');
+            });
         } else {
             if (!(postId)) {
                 console.log('Invalid post ID provided.');

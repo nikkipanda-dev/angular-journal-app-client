@@ -1,14 +1,14 @@
 <nav class="sticky-top container-fluid p-0 d-flex justify-content-center align-items-center bg-light">
     <div class="container-xxl d-flex flex-column flex-md-row justify-content-center justify-content-sm-between align-items-center">
-        <a routerLink="/" class="btn btn-sm me-2"><h1>{{ title }}</h1></a>
+        <a routerLink="/" class="btn btn-sm me-md-2"><h1>{{ title }}</h1></a>
         <div class="d-flex flex-row justify-content-center justify-content-md-end align-items-stretch align-items-center">
-            <a routerLink="/login" class="btn btn-sm me-2"   [ngStyle]="{
+            <a routerLink="/login" class="btn btn-sm me-md-2"   [ngStyle]="{
                 'display' : showAuthActions ? 'block' : 'none'
             }">Log In</a>
-            <a routerLink="/register" class="btn btn-sm {{ showAuthActions ? 'me-2' : '' }}"   [ngStyle]="{
+            <a routerLink="/register" class="btn btn-sm {{ showAuthActions ? 'me-md-2' : '' }}"   [ngStyle]="{
                 'display' : showAuthActions ? 'block' : 'none'
             }">Register</a>
-            <a routerLink="/posts" class="btn btn-sm {{ showAuthActions ? 'me-2' : '' }}" [ngStyle]="{
+            <a routerLink="/posts" class="btn btn-sm {{ showAuthActions ? 'me-md-2' : '' }}" [ngStyle]="{
                 'display' : showAuthActions ? 'none' : 'block'
             }">Posts</a>
             <app-button text="Sign out" [ngStyle]="{

@@ -1,4 +1,4 @@
-<div class="container bg-light mt-3" [ngStyle]="{
+<div class="container bg-light mt-3 py-3" [ngStyle]="{
     'max-width': '800px'
 }">
     <div class="mb-3">
@@ -11,7 +11,7 @@
         <textarea class="form-control" id="message" rows="3"></textarea>
         <span id="message-error"></span>
     </div>
-    <div class="mb-3">
+    <div class="text-center d-flex flex-column flex-sm-row justify-content-center justify-content-sm-end align-items-stretch align-items-sm-center">
         <app-button type='button' class="btn-secondary" text="Submit" (btnClick)="post()"></app-button>
     </div>
 </div>

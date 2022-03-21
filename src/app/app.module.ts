@@ -20,7 +20,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatButtonModule} from '@angular/material/button';
 const appRoutes: Routes = [
     { path: '', component: HomeComponent},
     { path: 'login', component: LoginComponent },
@@ -50,8 +51,11 @@ const appRoutes: Routes = [
     BrowserModule,
     FontAwesomeModule,
     HttpClientModule,
+    MatButtonModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes, {enableTracing: true})
+    RouterModule.forRoot(appRoutes, {enableTracing: true}),
+    BrowserAnimationsModule
+
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

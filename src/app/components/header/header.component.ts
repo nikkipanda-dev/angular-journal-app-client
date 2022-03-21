@@ -11,15 +11,16 @@ export class HeaderComponent implements OnInit {
     title: string = 'Digital Journal';
     showAuthActions!: boolean;
     private userId!: number;
-  
+
     constructor(private cookieService: CookieService) {}
 
     ngOnInit(): void {
         if (this.cookieService.check('journal_app_user') && this.cookieService.check('journal_app_token')) {
             this.showAuthActions = false;
+            this.userId = JSON.parse(this.cookieService.get('journal_app_user')).id;
         } else {
             this.showAuthActions = true;
-            this.userId = JSON.parse(this.cookieService.get('journal_app_user')).id;
+
         }
     }
 

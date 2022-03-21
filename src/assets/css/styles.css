@@ -23,6 +23,11 @@ button, button:focus, .btn, .btn-sm, a {
     box-shadow: none !important;
 }
 
+.test {
+  background: linear-gradient(#e66465, #9198e5);
+}
+
+
 @media screen and (max-width: 576px) {
     main, #home, #home > div, #about, #about > div, #login, #login > div, #register, #register > div, #posts, #rposts > div {
         min-height: auto;

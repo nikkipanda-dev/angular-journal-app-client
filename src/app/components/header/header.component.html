@@ -11,9 +11,13 @@
             <a routerLink="/posts" class="btn btn-sm {{ showAuthActions ? 'me-md-2' : '' }}" [ngStyle]="{
                 'display' : showAuthActions ? 'none' : 'block'
             }">Posts</a>
-            <app-button text="Sign out" [ngStyle]="{
+            <app-button
+            type='button'
+            class="btn-secondary"
+            text="Sign out" [ngStyle]="{
                 'display' : showAuthActions ? 'none' : 'block'
             }" (btnClick)="logout()"></app-button>
         </div>
     </div>
 </nav>
+

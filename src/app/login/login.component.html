@@ -18,8 +18,11 @@
                 </div>
                 <span id="password-error" class="text-center text-sm-start text-danger small"></span>
             </div>
-            <div class="text-center d-flex flex-column flex-sm-row justify-content-center align-items-stretch align-items-sm-center">
+            <div class="mb-4 text-center d-flex flex-column flex-sm-row justify-content-center align-items-stretch align-items-sm-center">
                 <app-button type="button" text="Log In" class="btn-secondary rounded header" (btnClick)="login()"></app-button>
+            </div>
+            <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center">
+                <a routerLink="/reset_password" class="btn btn-sm">Forgot password?</a>
             </div>
         </form>
     </div>

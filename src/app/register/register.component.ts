@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
         let passwordConfirmation = (document.getElementById('password-confirmation') as HTMLInputElement).value;
 
         if (email && password && passwordConfirmation) {
-            axios.post('https://demo-angular-nikkipanda.xyz/api/register', {
+            axios.post('http://localhost:8000/api/register', {
                 email: email,
                 password: password,
                 password_confirmation: passwordConfirmation
@@ -57,7 +57,7 @@ export class RegisterComponent implements OnInit {
                         window.location.pathname = '/'
                     }
                 } else {
-                    (document.getElementById('register-error') as HTMLDivElement).innerHTML = response.data.errorText;
+                    (document.getElementById('register-error') as HTMLDivElement).innerHTML = `<div class="alert alert-danger" role="alert">${response.data.errorText}</div>`;
                 }
             })
 

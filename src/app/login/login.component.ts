@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
         let password = (document.getElementById('login-password') as HTMLInputElement).value;
 
         if (email && password) {
-            axios.post('http://localhost:8000/api/login', {
+            axios.post('https://demo-angular-nikkipanda.xyz/api/login', {
                 email: email,
                 password: password,
             }, {

@@ -19,7 +19,7 @@ export class ResetPasswordComponent implements OnInit {
         let passwordConfirmation = (document.getElementById('password-confirmation') as HTMLInputElement).value;
 
         if (email && password && passwordConfirmation) {
-            axios.post('http://localhost:8000/api/account/reset_password', {
+            axios.post('https://demo-angular-nikkipanda.xyz/api/account/reset_password', {
                 email: email,
                 password: password,
                 password_confirmation: passwordConfirmation

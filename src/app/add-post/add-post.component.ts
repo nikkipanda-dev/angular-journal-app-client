@@ -42,7 +42,7 @@ export class AddPostComponent implements OnInit {
             formData.append('user_id', userId);
             formData.append('title', title);
             formData.append('body', body);
-            formData.append('image', image[0]);
+            image[0] && formData.append('image', image[0]);
 
             axios.post('https://demo-angular-nikkipanda.xyz/api/store', formData, {
                 headers: {

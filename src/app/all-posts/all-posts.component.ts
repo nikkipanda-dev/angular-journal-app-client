@@ -12,6 +12,7 @@ export class AllPostsComponent implements OnInit {
     posts: Post[] = [];
     page: number = 1;
     allPostsLen!: number;
+    pageLen!: number;
     private userId!: number;
 
     constructor(private cookieService: CookieService) {}
@@ -46,11 +47,8 @@ export class AllPostsComponent implements OnInit {
             })
 
             .then(response => {
-                console.log('response ', response.data.data.posts)
                 if (response.data.isSuccess) {
                     for (let val of response.data.data.posts) {
-                        console.log('id ', val.id);
-
                         const date = new Intl.DateTimeFormat('en-US', {
                             timeZone: 'Asia/Manila',
                             dateStyle: 'medium',
@@ -60,7 +58,8 @@ export class AllPostsComponent implements OnInit {
 
                         this.posts.push({
                             ...val,
-                            parsed_date: date
+                            parsed_date: date,
+                            parsed_image: (val.images.length > 0) ? new URL(val.images[0].path, 'https://demo-angular-nikkipanda.xyz/') : '',
                         })
                     }
                 } else {
@@ -71,8 +70,6 @@ export class AllPostsComponent implements OnInit {
             .catch(err => {
                 console.log('err ', err.response ? err.response : err)
             });
-        } else {
-            console.log('not more than 5');
         }
     }
 
@@ -98,8 +95,6 @@ export class AllPostsComponent implements OnInit {
             .then(response => {
                 if (response.data.isSuccess) {
                     for (let val of response.data.data.posts) {
-                        console.log('id ', val.id);
-
                         const date = new Intl.DateTimeFormat('en-US', {
                             timeZone: 'Asia/Manila',
                             dateStyle: 'medium',
@@ -109,7 +104,8 @@ export class AllPostsComponent implements OnInit {
 
                         this.posts.push({
                             ...val,
-                            parsed_date: date
+                            parsed_date: date,
+                            parsed_image: (val.images.length > 0) ? new URL(val.images[0].path, 'https://demo-angular-nikkipanda.xyz/') : '',
                         })
                     }
                 } else {
@@ -120,8 +116,6 @@ export class AllPostsComponent implements OnInit {
             .catch(err => {
                 console.log('err ', err.response ? err.response : err)
             });
-        } else {
-            console.log('not more than 5 ', this.posts);
         }
     }
 
@@ -140,6 +134,11 @@ export class AllPostsComponent implements OnInit {
         .then(response => {
             if (response.data.isSuccess) {
                 this.allPostsLen = response.data.data.posts.length;
+                if (this.allPostsLen > 0) {
+                    this.pageLen = Math.ceil(this.allPostsLen / 5) - 1;
+                } else {
+                    this.pageLen = 0;
+                }
 
                 for (let val of response.data.data.posts.slice(0, 5)) {
                     const date = new Intl.DateTimeFormat('en-US', {

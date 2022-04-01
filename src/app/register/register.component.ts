@@ -57,7 +57,7 @@ export class RegisterComponent implements OnInit {
                         window.location.pathname = '/'
                     }
                 } else {
-                    (document.getElementById('register-error') as HTMLDivElement).innerHTML = response.data.errorText;
+                    (document.getElementById('register-error') as HTMLDivElement).innerHTML = `<div class="alert alert-danger" role="alert">${response.data.errorText}</div>`;
                 }
             })
 

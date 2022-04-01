@@ -23,6 +23,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { SettingsComponent } from './settings/settings.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -30,7 +31,8 @@ const appRoutes: Routes = [
     { path: 'register', component: RegisterComponent },
     {path: 'about', component: AboutComponent},
     {path: 'posts', component: PostsComponent},
-    { path: 'settings', component: SettingsComponent }
+    { path: 'settings', component: SettingsComponent },
+    { path: 'reset_password', component: ResetPasswordComponent }
 ]
 
 @NgModule({
@@ -49,7 +51,8 @@ const appRoutes: Routes = [
     RegisterComponent,
     ModalComponent,
     SidebarComponent,
-    SettingsComponent
+    SettingsComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

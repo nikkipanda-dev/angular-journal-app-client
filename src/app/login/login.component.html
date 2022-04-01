@@ -1,19 +1,25 @@
 <section class="container-fluid bg-light p-0" [ngStyle]="{
     'max-width': '500px'
 }" id="login">
-    <div class="container-xxl pt-5 text-center p-3">
+    <div class="container-xxl pt-5 p-3">
+        <div id="login-error" class="text-center text-sm-start"></div>
         <form action="http://localhost:8000/api/login" method="POST" id="login-form" enctype="multipart/form-data">
-            <div class="form-floating mb-3">
-                <input type="email" class="form-control" name="email" id="login-email" placeholder="name@example.com">
-                <label for="login-email">Email address</label>
+            <div class="mb-3 d-flex flex-column">
+                <div class="form-floating">
+                    <input type="email" class="form-control" name="email" id="login-email" placeholder="name@example.com">
+                    <label for="login-email">Email address</label>
+                </div>
+                <span id="email-error" class="text-center text-sm-start text-danger small"></span>
             </div>
-            <div class="form-floating mb-3">
-                <input type="password" class="form-control" name="password" id="login-password" placeholder="Password">
-                <label for="login-password">Password</label>
+            <div class="mb-3 d-flex flex-column">
+                <div class="form-floating">
+                    <input type="password" class="form-control" name="password" id="login-password" placeholder="Password">
+                    <label for="login-password">Password</label>
+                </div>
+                <span id="password-error" class="text-center text-sm-start text-danger small"></span>
             </div>
-            <div
-                class="text-center d-flex flex-column flex-sm-row justify-content-center align-items-stretch align-items-sm-center">
-                <app-button type="button" text="Log In" class="btn-secondary" (btnClick)="login()"></app-button>
+            <div class="text-center d-flex flex-column flex-sm-row justify-content-center align-items-stretch align-items-sm-center">
+                <app-button type="button" text="Log In" class="btn-secondary rounded header" (btnClick)="login()"></app-button>
             </div>
         </form>
     </div>

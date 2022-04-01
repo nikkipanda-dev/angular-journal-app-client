@@ -23,15 +23,11 @@ export class PostComponent implements OnInit {
     }
 
     getData() {
-        console.log('hello', this.userId);
-
         (document.getElementById('modal-body') as HTMLDivElement).innerHTML = '';
         (document.getElementById('static-modal-label') as HTMLDivElement).innerHTML = 'Update Post';
 
-        console.log('this ', this)
-
         const editForm = document.createElement('div');
-        editForm.innerHTML = `<div class="container"><div class="mb-3"><label for="update-title" class="form-label">Title</label><input type='hidden' name='user_id' id="user-id" value="${this.userId}" /><input type='hidden' name='post_id' id="post-id" value="${this.post.id}" /><input type="text" class="form-control" id="update-title" value="${this.post.title}"><span id="update-title-error"></span></div><div class="mb-3"><label for="update-message" class="form-label">Body</label><textarea class="form-control" id="update-message" rows="3" value="${this.post.body}">${this.post.body}</textarea><span id="update-message-error"></span></div><div class="mb-3 d-flex justify-content-center align-items-stretch align-items-sm-center"><button type='button' class="mt-3 btn btn-sm btn-secondary" id="update-button">Save</button></div></div>`;
+        editForm.innerHTML = `<div class="container"><div class="mb-3"><label for="update-title" class="form-label me-sm-2 header">Title</label><input type='hidden' name='user_id' id="user-id" value="${this.userId}" /><input type='hidden' name='post_id' id="post-id" value="${this.post.id}" /><input type="text" class="form-control" id="update-title" value="${this.post.title}"><span id="update-title-error"></span></div><div class="mb-3"><label for="update-message" class="form-label header">Body</label><textarea class="form-control" id="update-message" rows="3" value="${this.post.body}">${this.post.body}</textarea><span id="update-message-error"></span></div><div class="mb-3 d-flex justify-content-center align-items-stretch align-items-sm-center"><button type='button' class="mt-3 btn btn-sm btn-secondary header" id="update-button">Save</button></div></div>`;
 
         (document.getElementById('modal-body') as HTMLDivElement).appendChild(editForm);
         (document.getElementById('update-button') as HTMLButtonElement).addEventListener('click', this.updatePost);
@@ -41,10 +37,8 @@ export class PostComponent implements OnInit {
         (document.getElementById('modal-body') as HTMLDivElement).innerHTML = '';
         (document.getElementById('static-modal-label') as HTMLDivElement).innerHTML = 'Confirm Deletion';
 
-        console.log('this ', this)
-
         const deleteAlert = document.createElement('div');
-        deleteAlert.innerHTML = `<div class="alert alert-danger" role="alert">You are about to delete this post. Continue?</div><input type='hidden' name='user_id' id="user-id" value="${this.userId}" /><input type='hidden' name='post_id' id="post-id" value="${this.post.id}" /><div class="mb-3 d-flex flex-column flex-sm-row justify-content-center align-items-stretch align-items-sm-center"><button type='button' class="mt-3 btn btn-sm btn-danger" id="delete-button">Delete</button></div>`;
+        deleteAlert.innerHTML = `<div class="alert alert-danger" role="alert">You are about to delete this post. Continue?</div><input type='hidden' name='user_id' id="user-id" value="${this.userId}" /><input type='hidden' name='post_id' id="post-id" value="${this.post.id}" /><div class="mb-3 d-flex flex-column flex-sm-row justify-content-center align-items-stretch align-items-sm-center"><button type='button' class="mt-3 btn btn-sm btn-danger header" id="delete-button">Delete</button></div>`;
 
         (document.getElementById('modal-body') as HTMLDivElement).appendChild(deleteAlert);
         (document.getElementById('delete-button') as HTMLButtonElement).addEventListener('click', this.deletePost);

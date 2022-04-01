@@ -20,6 +20,9 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
+import { SettingsComponent } from './settings/settings.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -27,6 +30,7 @@ const appRoutes: Routes = [
     { path: 'register', component: RegisterComponent },
     {path: 'about', component: AboutComponent},
     {path: 'posts', component: PostsComponent},
+    { path: 'settings', component: SettingsComponent }
 ]
 
 @NgModule({
@@ -44,14 +48,17 @@ const appRoutes: Routes = [
     LoginComponent,
     RegisterComponent,
     ModalComponent,
-    SidebarComponent
+    SidebarComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
     FontAwesomeModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes, {enableTracing: true})
+    RouterModule.forRoot(appRoutes, {enableTracing: true}),
+    BrowserAnimationsModule,
+    MatButtonModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

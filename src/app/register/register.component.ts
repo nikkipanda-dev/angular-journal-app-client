@@ -32,35 +32,51 @@ export class RegisterComponent implements OnInit {
                 }
             })
 
-                .then(response => {
-                    if (response.data.isSuccess) {
-                        this.cookieService.set('journal_app_user', JSON.stringify(response.data.data.user.details), {
-                            expires: new Date().getHours() + 1,
-                            sameSite: 'Strict',
-                            secure: true,
-                        });
+            .then(response => {
+                (document.getElementById('register-error') as HTMLDivElement).innerHTML = '';
+                (document.getElementById('register-email-error') as HTMLSpanElement).innerHTML = '';
+                (document.getElementById('register-password-error') as HTMLSpanElement).innerHTML = '';
+                (document.getElementById('register-password_confirmation-error') as HTMLSpanElement).innerHTML = '';
 
-                        this.cookieService.set('journal_app_token', JSON.stringify(response.data.data.user.token), {
-                            expires: new Date().getHours() + 1,
-                            sameSite: 'Strict',
-                            secure: true,
-                        });
+                if (response.data.isSuccess) {
+                    this.cookieService.set('journal_app_user', JSON.stringify(response.data.data.user.details), {
+                        expires: new Date().getHours() + 1,
+                        sameSite: 'Strict',
+                        secure: true,
+                    });
 
-                        if (this.cookieService.check('journal_app_user') && this.cookieService.check('journal_app_token')) {
-                            window.location.pathname = '/posts'
-                        } else {
-                            window.location.pathname = '/'
-                        }
+                    this.cookieService.set('journal_app_token', JSON.stringify(response.data.data.user.token), {
+                        expires: new Date().getHours() + 1,
+                        sameSite: 'Strict',
+                        secure: true,
+                    });
+
+                    if (this.cookieService.check('journal_app_user') && this.cookieService.check('journal_app_token')) {
+                        window.location.pathname = '/posts'
                     } else {
-                        console.log('register err ', response.data.errorText);
+                        window.location.pathname = '/'
                     }
-                })
+                } else {
+                    (document.getElementById('register-error') as HTMLDivElement).innerHTML = response.data.errorText;
+                }
+            })
 
-                .catch(err => {
-                    console.log('err ', err.response ? err.response.data.errors : '');
-                })
+            .catch(err => {
+                if (err.response && err.response.data.errors) {
+                    Object.keys(err.response.data.errors).map((i, val) => {
+                        const error: any = Object.values(err.response.data.errors)[val];
+                        (document.getElementById('register-' + i + '-error') as HTMLSpanElement).innerHTML = error[0];
+                    });
+                };
+            })
         } else {
-            console.log('empty');
+            if (!(email)) {
+                (document.getElementById('register-email-error') as HTMLSpanElement).innerHTML = 'Email address field cannot be empty.';
+            }
+
+            if (!(password)) {
+                (document.getElementById('register-password-error') as HTMLSpanElement).innerHTML = 'Password field cannot be empty.';
+            }
         }
     }
 }

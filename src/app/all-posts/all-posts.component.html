@@ -8,8 +8,8 @@
     [post]="post">
     </app-post>
     <div class="my-5 d-flex flex-wrap justify-content-center align-items-center">
-        <app-button text="{{ (allPostsLen > 0) ? 'Previous' : '' }}" (btnClick)="previous()"></app-button>
-        <div>{{ (allPostsLen > 0) ? page : '' }}</div>
-        <app-button text="{{ (allPostsLen > 0) ? 'Next' : '' }}" (btnClick)="next()"></app-button>
+        <app-button text="{{ (allPostsLen > 0) ? '&#xab; Previous' : '' }}" class="me-2" (btnClick)="previous()"></app-button>
+        <div class="header me-2">{{ (allPostsLen > 0) ? 'Page ' + page + ' of ' + allPostsLen : '' }}</div>
+        <app-button text="{{ (allPostsLen > 0) ? 'Next &#xbb;' : '' }}" (btnClick)="next()"></app-button>
     </div>
 </div>

@@ -31,6 +31,10 @@ export class LoginComponent implements OnInit {
             })
 
             .then(response => {
+                (document.getElementById('login-error') as HTMLDivElement).innerHTML = '';
+                (document.getElementById('email-error') as HTMLSpanElement).innerHTML = '';
+                (document.getElementById('password-error') as HTMLSpanElement).innerHTML = '';
+
                 if (response.data.isSuccess) {
                     this.cookieService.set('journal_app_user', JSON.stringify(response.data.data.user.details), {
                         expires: new Date().getHours() + 1,
@@ -50,15 +54,26 @@ export class LoginComponent implements OnInit {
                         window.location.pathname = '/'
                     }
                 } else {
-                    console.log('login err ', response.data.errorText);
+                    (document.getElementById('login-error') as HTMLDivElement).innerHTML = `<div class="alert alert-danger" role="alert">${response.data.errorText}</div>`;
                 }
             })
 
             .catch(err => {
-                console.log('err ', err.response ? err.response.data.errors : '');
+                if (err.response && err.response.data.errors) {
+                    Object.keys(err.response.data.errors).map((i, val) => {
+                        const error: any = Object.values(err.response.data.errors)[val];
+                        (document.getElementById(i + '-error') as HTMLSpanElement).innerHTML = error[0];
+                    });
+                };
             })
         } else {
-            console.log('empty');
+            if (!(email)) {
+                (document.getElementById('email-error') as HTMLSpanElement).innerHTML = 'Email address field cannot be empty.';
+            }
+
+            if (!(password)) {
+                (document.getElementById('password-error') as HTMLSpanElement).innerHTML = 'Email address field cannot be empty.';
+            }
         }
     }
 }

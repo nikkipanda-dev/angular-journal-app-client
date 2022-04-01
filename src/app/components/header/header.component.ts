@@ -8,7 +8,7 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-    title: string = 'Digital Journal';
+    title: string = 'Journly';
     showAuthActions!: boolean;
     private userId!: number;
 

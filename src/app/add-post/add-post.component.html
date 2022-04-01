@@ -1,21 +1,27 @@
 <div class="container mt-3" [ngStyle]="{
     'max-width': '800px'
 }">
-    <div class="mb-3 d-flex flex-column flex-sm-row justify-content-center justify-content-sm-end align-items-center align-items-sm-baseline text-start">
-        <label for="title" class="form-label me-sm-2">Title</label>
-        <input type="text" class="form-control" id="title">
-        <span id="title-error"></span>
+    <div class="mb-3 d-flex flex-column">
+        <div class="d-flex flex-column flex-sm-row justify-content-center justify-content-sm-end align-items-center align-items-sm-baseline text-start">
+            <label for="title" class="form-label me-sm-2 header">Title</label>
+            <input type="text" class="form-control" id="title" />
+        </div>
+        <span id="title-error" class="text-center text-sm-start"></span>
     </div>
-    <div class="mb-3 d-flex flex-column justify-content-center align-items-center align-items-sm-start text-start">
-        <label for="message" class="form-label">Body</label>
-        <textarea class="form-control" id="message" rows="3"></textarea>
-        <span id="message-error"></span>
+    <div class="mb-3 d-flex flex-column">
+        <div class="d-flex flex-column justify-content-center align-items-center align-items-sm-start text-start">
+            <label for="message" class="form-label header">Body</label>
+            <textarea class="form-control" id="message" rows="3"></textarea>
+        </div>
+        <span class="text-center text-sm-start" id="body-error"></span>
     </div>
-    <div class="mb-3 d-flex flex-column justify-content-center align-items-center">
-
-        <app-button
-        class="rounded-1 btn-primary"
-
-        text="Submit" (btnClick)="post()"></app-button>
+    <div class="mb-4 d-flex flex-column flex-sm-row justify-content-center justify-content-sm-between align-items-stretch align-items-center">
+        <div class="me-sm-3">
+            <input class="form-control form-control-sm" id="image" name="image" type="file" accept="image/*" />
+            <span class="text-center text-sm-start" id="image-error"></span>
+        </div>
+        <div class="mt-3 mt-sm-0 d-flex justify-content-center justify-content-sm-end align-items-center">
+            <app-button type='button' class="btn-secondary header rounded" text="Submit" (btnClick)="post()"></app-button>
+        </div>
     </div>
 </div>

@@ -8,7 +8,6 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-
     constructor(private cookieService: CookieService) {
         this.checkCookies();
     }

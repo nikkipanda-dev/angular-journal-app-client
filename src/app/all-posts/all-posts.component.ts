@@ -142,7 +142,6 @@ export class AllPostsComponent implements OnInit {
                 this.allPostsLen = response.data.data.posts.length;
 
                 for (let val of response.data.data.posts.slice(0, 5)) {
-                    console.log('val ', val);
                     const date = new Intl.DateTimeFormat('en-US', {
                         timeZone: 'Asia/Manila',
                         dateStyle: 'medium',

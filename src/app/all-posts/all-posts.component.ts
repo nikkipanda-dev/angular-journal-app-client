@@ -153,7 +153,7 @@ export class AllPostsComponent implements OnInit {
                     this.posts.push({
                         ...val,
                         parsed_date: date,
-                        parsed_image: (val.images.length > 0) ? new URL(val.images[0].path, 'http://localhost:8000/') : '',
+                        parsed_image: (val.images.length > 0) ? new URL(val.images[0].path, 'https://demo-angular-nikkipanda.xyz/') : '',
                         
                     })
                 }

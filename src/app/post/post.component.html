@@ -1,18 +1,19 @@
-<div class="card mt-3">
+<div class="card mt-4" [ngStyle]="{
+    boxShadow: '5px 10px 20px #efefef',
+    border: '1px solid #e9e9e9'
+}">
     <div class="card-header d-flex flex-wrap flex-row justify-content-center justify-content-between align-items-center">
-        <h4>{{ post.title ? post.title : '' }}</h4>
-        <app-button text="Edit" class="btn-warning" data-bs-toggle="modal" data-bs-target="#static-modal" data-target-type="update" id="{{ post.id + '-card' }}" (btnClick)="getData()"></app-button>
+        <h2 class="my-auto header">{{ post.title ? post.title : '' }}</h2>
+        <app-button text="Edit" class="btn-warning header rounded" data-bs-toggle="modal" data-bs-target="#static-modal" data-target-type="update" id="{{ post.id + '-card' }}" (btnClick)="getData()"></app-button>
     </div>
     <div class="card-body">
-        <div>
-            {{ post.body ? post.body : '' }}
+        <div class="clearfix text-start">
+            <img src="{{ post.parsed_image }}" class="post-image {{ post.parsed_image ? 'd-block' : 'd-none' }} col-md-6 float-md-start mb-3 me-md-3"/>
+            <p>{{ post.body ? post.body : '' }}</p>
         </div>
     </div>
     <div class="card-footer d-flex flex-wrap flex-row justify-content-center justify-content-sm-end align-items-center">
         <small class="text-muted me-0 me-sm-2">{{ post.parsed_date ? post.parsed_date : '' }}</small>
-        <button
-        mat-raised-button
-        color="warm"
-        text="Delete" class="btn btn-dark btn-sm rounded-0" data-bs-toggle="modal" data-bs-target="#static-modal" data-target-type="delete" id="{{ post.id + '-card' }}" (click)="showAlert()">Delete</button>
+        <button text="Delete" class="btn btn-dark btn-sm header" data-bs-toggle="modal" data-bs-target="#static-modal" data-target-type="delete" id="{{ post.id + '-card' }}" (click)="showAlert()">Delete</button>
     </div>
 </div>

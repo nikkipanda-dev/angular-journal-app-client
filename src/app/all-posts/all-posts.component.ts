@@ -142,6 +142,7 @@ export class AllPostsComponent implements OnInit {
                 this.allPostsLen = response.data.data.posts.length;
 
                 for (let val of response.data.data.posts.slice(0, 5)) {
+                    console.log('val ', val);
                     const date = new Intl.DateTimeFormat('en-US', {
                         timeZone: 'Asia/Manila',
                         dateStyle: 'medium',
@@ -151,7 +152,9 @@ export class AllPostsComponent implements OnInit {
 
                     this.posts.push({
                         ...val,
-                        parsed_date: date
+                        parsed_date: date,
+                        parsed_image: (val.images.length > 0) ? new URL(val.images[0].path, 'http://localhost:8000/') : '',
+                        
                     })
                 }
             } else {

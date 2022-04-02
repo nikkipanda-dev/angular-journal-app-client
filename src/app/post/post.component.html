@@ -14,6 +14,6 @@
     </div>
     <div  class="card-footer d-flex flex-wrap flex-row justify-content-center justify-content-sm-end align-items-center">
         <small class="text-muted me-0 me-sm-2">{{ post.parsed_date ? post.parsed_date : '' }}</small>
-        <button text="Delete" class="btn btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#static-modal" data-target-type="delete" id="{{ post.id + '-card' }}" (click)="showAlert()">Delete</button>
+        <button text="Delete" class="btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#static-modal" data-target-type="delete" id="{{ post.id + '-card' }}" (click)="showAlert()">Delete</button>
     </div>
 </div>

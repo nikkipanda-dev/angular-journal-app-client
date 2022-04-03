@@ -96,6 +96,18 @@ export class PostComponent implements OnInit {
                     }, 1000);
                 } else {
                     console.log('post err ', response.data.errorText);
+                    let ctr = 3;
+
+                    const redirect = setInterval(function () {
+                        if (ctr <= 0) {
+                            clearInterval(redirect);
+                            window.location.pathname = '/posts';
+                            window.scrollTo(0, 0);
+                        } else {
+                            (document.getElementById('edit-post-alert') as HTMLDivElement).innerHTML = `<div class="alert alert-secondary" role="alert">${response.data.errorText} Reloading in ${ctr + (ctr > 1 ? ' seconds...' : ' second...')}</div>`;
+                        }
+                        ctr -= 1;
+                    }, 1000);
                 }
             })
 
@@ -108,11 +120,11 @@ export class PostComponent implements OnInit {
             }
 
             if (!(title)) {
-                (document.getElementById('update-title-error') as HTMLInputElement).innerHTML = 'Title error';
+                (document.getElementById('update-title-error') as HTMLInputElement).innerHTML = 'Title field is required.';
             }
 
             if (!(body)) {
-                (document.getElementById('update-message-error') as HTMLInputElement).innerHTML = 'Body error';
+                (document.getElementById('update-message-error') as HTMLInputElement).innerHTML = 'Body field is required.';
             }
         }
     }

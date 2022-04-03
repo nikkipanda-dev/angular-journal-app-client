@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit {
             }
 
             if (!(password)) {
-                (document.getElementById('password-error') as HTMLSpanElement).innerHTML = 'Email address field cannot be empty.';
+                (document.getElementById('password-error') as HTMLSpanElement).innerHTML = 'Password field cannot be empty.';
             }
         }
     }

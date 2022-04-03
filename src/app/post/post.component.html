@@ -9,7 +9,7 @@
     <div class="card-body">
         <div class="clearfix text-start">
             <img src="{{ post.parsed_image }}" class="post-image {{ post.parsed_image ? 'd-block' : 'd-none' }} col-md-6 float-md-start mb-3 me-md-3"/>
-            <p style="text-align: justify;">{{ post.body ? post.body : '' }}</p>
+            <p style="text-align: justify; white-space: pre-wrap;">{{ post.body ? post.body : '' }}</p>
         </div>
     </div>
     <div  class="card-footer d-flex flex-wrap flex-row justify-content-center justify-content-sm-end align-items-center">

@@ -26,8 +26,10 @@ export class PostComponent implements OnInit {
         (document.getElementById('modal-body') as HTMLDivElement).innerHTML = '';
         (document.getElementById('static-modal-label') as HTMLDivElement).innerHTML = 'Update Post';
 
+        console.log('edit this ', this.post)
+
         const editForm = document.createElement('div');
-        editForm.innerHTML = `<div class="container"><div class="mb-3"><label for="update-title" class="form-label me-sm-2 header">Title</label><input type='hidden' name='user_id' id="user-id" value="${this.userId}" /><input type='hidden' name='post_id' id="post-id" value="${this.post.id}" /><input type="text" class="form-control" id="update-title" value="${this.post.title}"><span id="update-title-error"></span></div><div class="mb-3"><label for="update-message" class="form-label header">Body</label><textarea class="form-control" id="update-message" rows="3" value="${this.post.body}">${this.post.body}</textarea><span id="update-message-error"></span></div><div class="mb-3 d-flex justify-content-center align-items-stretch align-items-sm-center"><button type='button' class="mt-3 btn btn-sm btn-secondary header" id="update-button">Save</button></div></div>`;
+        editForm.innerHTML = `<div class="container"><div id="edit-post-alert" class="text-center text-sm-start"></div><div class="mb-3"><label for="update-title" class="form-label me-sm-2 header">Title</label><input type='hidden' name='user_id' id="user-id" value="${this.userId}" /><input type='hidden' name='post_id' id="post-id" value="${this.post.id}" /><input type="text" class="form-control" id="update-title" value="${this.post.title}"><span id="update-title-error"></span></div><div class="mb-3"><label for="update-message" class="form-label header">Body</label><textarea class="form-control" id="update-message" rows="3" value="${this.post.body}">${this.post.body}</textarea><span id="update-message-error"></span></div><div class="mb-3"><label for="update-image" class="form-label header">Update image:</label><input class="form-control form-control-sm" id="update-image" name="image" type="file" accept="image/*" /><span class="text-center text-sm-start" id="image-error"></span></div><div class="mb-5"><h6 class="header">Current image:</h6><img src="${this.post.parsed_image}" class="post-image" /></div><div class="mb-3 d-flex justify-content-center align-items-stretch align-items-sm-center"><button type='button' class="mt-3 btn btn-sm btn-outline-primary header" id="update-button">Save</button></div></div>`;
 
         (document.getElementById('modal-body') as HTMLDivElement).appendChild(editForm);
         (document.getElementById('update-button') as HTMLButtonElement).addEventListener('click', this.updatePost);
@@ -38,7 +40,7 @@ export class PostComponent implements OnInit {
         (document.getElementById('static-modal-label') as HTMLDivElement).innerHTML = 'Confirm Deletion';
 
         const deleteAlert = document.createElement('div');
-        deleteAlert.innerHTML = `<div class="alert alert-danger" role="alert">You are about to delete this post. Continue?</div><input type='hidden' name='user_id' id="user-id" value="${this.userId}" /><input type='hidden' name='post_id' id="post-id" value="${this.post.id}" /><div class="mb-3 d-flex flex-column flex-sm-row justify-content-center align-items-stretch align-items-sm-center"><button type='button' class="mt-3 btn btn-sm btn-danger header" id="delete-button">Delete</button></div>`;
+        deleteAlert.innerHTML = `<div id="delete-post-alert" class="text-center text-sm-start"><div class="alert alert-danger" role="alert">You are about to delete this post. Continue?</div></div><input type='hidden' name='user_id' id="user-id" value="${this.userId}" /><input type='hidden' name='post_id' id="post-id" value="${this.post.id}" /><div class="mb-3 d-flex flex-column flex-sm-row justify-content-center align-items-stretch align-items-sm-center"><button type='button' class="mt-3 btn btn-sm btn-danger header" id="delete-button">Delete</button></div>`;
 
         (document.getElementById('modal-body') as HTMLDivElement).appendChild(deleteAlert);
         (document.getElementById('delete-button') as HTMLButtonElement).addEventListener('click', this.deletePost);
@@ -49,6 +51,7 @@ export class PostComponent implements OnInit {
         let postId = null;
         let title = null;
         let body = null;
+        let image: any = null;
 
         if (document.getElementById('user-id') && document.getElementById('post-id') && document.getElementById('update-title') && document.getElementById('update-message')) {
             (document.getElementById('update-title-error') as HTMLInputElement).innerHTML = '';
@@ -58,15 +61,18 @@ export class PostComponent implements OnInit {
             postId = (document.getElementById('post-id') as HTMLInputElement).value;
             title = (document.getElementById('update-title') as HTMLInputElement).value;
             body = (document.getElementById('update-message') as HTMLInputElement).value;
+            image = (document.getElementById('update-image') as HTMLInputElement).files;
         }
 
         if (userId && postId && title && body) {
-            axios.post('https://demo-angular-nikkipanda.xyz/api/update', {
-                user_id: userId,
-                post_id: postId,
-                title: title,
-                body: body,
-            }, {
+            const updatePostForm: any = new FormData();
+            updatePostForm.append('user_id', userId);
+            updatePostForm.append('post_id', postId);
+            updatePostForm.append('title', title);
+            updatePostForm.append('body', body);
+            image[0] && updatePostForm.append('image', image[0]);
+
+            axios.post('https://demo-angular-nikkipanda.xyz/api/update', updatePostForm, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',
@@ -76,8 +82,18 @@ export class PostComponent implements OnInit {
 
             .then(response => {
                 if (response.data.isSuccess) {
-                    location.reload();
-                    window.scrollTo(0, 0);
+                    let ctr = 3;
+
+                    const redirect = setInterval(function () {
+                        if (ctr <= 0) {
+                            clearInterval(redirect);
+                            window.location.pathname = '/posts';
+                            window.scrollTo(0, 0);
+                        } else {
+                            (document.getElementById('edit-post-alert') as HTMLDivElement).innerHTML = `<div class="alert alert-success" role="alert">Successfully updated post. Reloading in ${ctr + (ctr > 1 ? ' seconds...' : ' second...')}</div>`;
+                        }
+                        ctr -= 1;
+                    }, 1000);
                 } else {
                     console.log('post err ', response.data.errorText);
                 }
@@ -124,8 +140,18 @@ export class PostComponent implements OnInit {
 
             .then(response => {
                 if (response.data.isSuccess) {
-                    location.reload();
-                    window.scrollTo(0, 0);
+                    let ctr = 3;
+
+                    const redirect = setInterval(function () {
+                        if (ctr <= 0) {
+                            clearInterval(redirect);
+                            window.location.pathname = '/posts';
+                            window.scrollTo(0, 0);
+                        } else {
+                            (document.getElementById('delete-post-alert') as HTMLDivElement).innerHTML = `<div class="alert alert-success" role="alert">Successfully deleted post. Reloading in ${ctr + (ctr > 1 ? ' seconds...' : ' second...')}</div>`;
+                        }
+                        ctr -= 1;
+                    }, 1000);
                 } else {
                     console.log('post err ', response.data.errorText);
                 }

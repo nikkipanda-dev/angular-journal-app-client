@@ -6,14 +6,14 @@
             <label for="title" class="form-label me-sm-2 header">Title</label>
             <input type="text" class="form-control" id="title" />
         </div>
-        <span id="title-error" class="text-center text-sm-start"></span>
+        <span class="text-center text-sm-start text-danger small" id="title-error"></span>
     </div>
     <div class="mb-3 d-flex flex-column">
         <div class="d-flex flex-column justify-content-center align-items-center align-items-sm-start text-start">
             <label for="message" class="form-label header">Body</label>
             <textarea class="form-control" id="message" rows="3"></textarea>
         </div>
-        <span class="text-center text-sm-start" id="body-error"></span>
+        <span class="text-center text-sm-start text-danger small" id="body-error"></span>
     </div>
     <div class="mb-4 d-flex flex-column flex-sm-row justify-content-center justify-content-sm-between align-items-stretch align-items-center">
         <div class="me-sm-3">
@@ -21,9 +21,9 @@
             <span class="text-center text-sm-start" id="image-error"></span>
         </div>
         <div class="mt-3 mt-sm-0 d-flex justify-content-center justify-content-sm-end align-items-center">
-        <div class="custom-padding">
-            <app-button type='button' class="btn-primary" text="Submit" (btnClick)="post()"></app-button>
-        </div>
+            <div class="custom-padding">
+                <app-button type='button' class="btn-primary" text="Submit" (btnClick)="post()"></app-button>
+            </div>
         </div>
     </div>
 </div>

@@ -75,11 +75,11 @@ export class AddPostComponent implements OnInit {
             })
         } else {
             if (!(title)) {
-                (document.getElementById('title-error') as HTMLSpanElement).innerHTML = 'Title error';
+                (document.getElementById('title-error') as HTMLSpanElement).innerHTML = 'Title field is required.';
             }
 
             if (!(body)) {
-                (document.getElementById('body-error') as HTMLSpanElement).innerHTML = 'Body error';
+                (document.getElementById('body-error') as HTMLSpanElement).innerHTML = 'Body field is required.';
             }
         }
     }

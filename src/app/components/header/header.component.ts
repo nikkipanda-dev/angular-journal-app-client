@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
 
     logout() {
         if (!(this.showAuthActions)) {
-            axios.post('http://localhost:8000/api/logout', {
+            axios.post('https://demo-angular-nikkipanda.xyz/api/logout', {
                 id: this.userId,
             }, {
                 headers: {
